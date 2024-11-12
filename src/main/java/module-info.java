@@ -10,6 +10,7 @@ module com.example.fbo_event_management_system {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires java.desktop;
 
     opens com.example.fbo_event_management_system to javafx.fxml;
     exports com.example.fbo_event_management_system;
