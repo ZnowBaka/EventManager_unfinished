@@ -119,6 +119,31 @@ public class EventManagerController {
         stage.show();
     }
 
+    @FXML
+    public void onToProfileScreenButtonClick(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(EventManagerApp.class.getResource("File.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(fxmlLoader.load(), 800, 450);
+        stage.setTitle("Profile Screen");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    public void onShowEventsButtonClick(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(EventManagerApp.class.getResource("File.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(fxmlLoader.load(), 800, 450);
+        stage.setTitle("Events Screen");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    public void onSelectEventButtonClick(){
+
+    }
+
 
     //endregion
 
