@@ -5,13 +5,12 @@ package com.example.fbo_event_management_system;
     we should make a Factory for StandardUsers
     */
 
-abstract class User {
+public class User {
     protected String nameOfUser;
     protected String userLoginName;
     private String userLoginCode;
     protected boolean adminPrivilege;
     protected boolean manager;
-
     //Constructor
     public User(String nameOfUser, String userLoginName, String userLoginCode, boolean adminPrivilege, boolean manager) {
         this.nameOfUser = nameOfUser;

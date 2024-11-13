@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.fbo_event_management_system.EventManagerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.fbo_event_management_system.StartController">
    <children>
       <Label fx:id="welcomeText" layoutX="62.0" layoutY="72.0" text="Welcome to the Event Manager software" wrapText="true">
          <padding>
@@ -17,14 +17,14 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField layoutX="75.0" layoutY="203.0" prefHeight="25.0" prefWidth="300.0" text="Username..." />
-      <TextField layoutX="75.0" layoutY="236.0" prefHeight="25.0" prefWidth="300.0" text="Password..." />
+      <TextField fx:id="userNameField" layoutX="75.0" layoutY="203.0" prefHeight="25.0" prefWidth="300.0" text="Username..." />
+      <TextField fx:id="userPassField" layoutX="75.0" layoutY="236.0" prefHeight="25.0" prefWidth="300.0" text="Password..." />
       <Button layoutX="199.0" layoutY="273.0" mnemonicParsing="false" onAction="#onLoginButtonClick" text="Login">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Label layoutX="174.0" layoutY="155.0" text="Please log in" wrapText="true">
+      <Label fx:id="loginLabel" layoutX="174.0" layoutY="155.0" text="Please log in" wrapText="true">
          <padding>
             <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
          </padding>
