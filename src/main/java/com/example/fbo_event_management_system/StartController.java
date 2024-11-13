@@ -15,9 +15,10 @@ import java.util.ArrayList;
 public class StartController {
     public int newUserIndex = -1;
     public static ArrayList<User> userArrayList = new ArrayList<>();
-    private Stage stage;
-    private Scene scene;
-    User user1 = new User("Snorre", "123");
+
+
+
+
 
     //region Labels and texts
 
