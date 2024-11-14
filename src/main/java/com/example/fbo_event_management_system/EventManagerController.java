@@ -6,16 +6,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
-import static com.example.fbo_event_management_system.StartController.userArrayList;
 
 
 public class EventManagerController {
+    EventManagerApp appAction = new EventManagerApp();
 
     public ArrayList<Event> eventArrayList = new ArrayList<>();
     private Stage stage;
@@ -39,29 +37,18 @@ public class EventManagerController {
 
     @FXML
     public void onToProfileScreenButtonClick(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(EventManagerApp.class.getResource("File.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(fxmlLoader.load(), 800, 450);
-        stage.setTitle("Profile Screen");
-        stage.setScene(scene);
-        stage.show();
+        appAction.changeScene("Profile-Screen.fxml");
     }
 
     @FXML
     public void onShowEventsButtonClick(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(EventManagerApp.class.getResource("File.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(fxmlLoader.load(), 800, 450);
-        stage.setTitle("Events Screen");
-        stage.setScene(scene);
-        stage.show();
+        appAction.changeScene("Events-Screen.fxml");
     }
 
     @FXML
     public void onSelectEventButtonClick(){
 
     }
-
 
     //endregion
 

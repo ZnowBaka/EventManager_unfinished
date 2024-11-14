@@ -15,6 +15,9 @@ import java.util.ArrayList;
 import static com.example.fbo_event_management_system.StartController.userArrayList;
 
 public class NewUserController {
+    File userFile = new File("userNameFile");
+    EventManagerApp appAction = new EventManagerApp();
+    public static ArrayList<String> existingUsernames = new ArrayList<>();
 
     @FXML
     private TextField newUserNameField;
@@ -26,17 +29,15 @@ public class NewUserController {
 
     @FXML
     protected void onNewUserScreenDoneButtonClick(ActionEvent event) throws IOException {
-        String newUserName = newUserNameField.getText().toString();
+        String newUserName = newUserNameField.getCharacters().toString();
         // Check if the file exists
         // Ensure the file is readable
         if (isFileReadable(userFile)) {
             // Write data to file
-                            writeToFile(userFile, newUserName);
-
+            writeToFile(userFile, newUserName);
         }else {
-          System.out.println("Error writing to file ");
+            System.out.println("Error writing to file ");
         }
-
         // Read from file and write to Array
         writeFromFileToArray(userFile);
         for (int i = 0; i < existingUsernames.size(); i++) {
@@ -71,12 +72,12 @@ public class NewUserController {
         return readable;
 
     }
-  
+
     public void writeFromFileToArray(File userFile){
         // Read all existing usernames from the file into a list
         try (BufferedReader reader = new BufferedReader(new FileReader(userFile))) {
             String line;
-            while ((line = reader.readLine()) != null) {
+            while ((line = reader.readLine()) != null && (line.equals(newUserNameField.getCharacters().toString()))) {
                 existingUsernames.add(line);
             }
             System.out.println(existingUsernames);

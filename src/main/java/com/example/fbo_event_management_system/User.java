@@ -9,22 +9,22 @@ public class User {
     protected String nameOfUser;
     protected String userLoginName;
     private String userLoginCode;
-    protected boolean adminPrivilege;
-    protected boolean manager;
+    protected boolean adminPrivilege = false;
+    protected boolean manager = false;
     //Constructor
-    public User(String nameOfUser, String userLoginName, String userLoginCode, boolean adminPrivilege, boolean manager) {
+    public User() {
         this.nameOfUser = nameOfUser;
         this.userLoginName = userLoginName;
         this.userLoginCode = userLoginCode;
-        this.adminPrivilege = adminPrivilege;
-        this.manager = manager;
     }
     public User (String userLoginName, String userLoginCode){
         this.userLoginName = userLoginName;
         this.userLoginCode = userLoginCode;
     }
 
+    public User(String nameOfUser, String userLoginName, String userLoginCode) {
 
+    }
 
 
     //region Sets and Gets
@@ -44,21 +44,20 @@ public class User {
         this.userLoginName = userLoginName;
     }
 
-    public String getUserLoginCode() {
+    protected String getUserLoginCode() {
         return userLoginCode;
     }
 
-    public void setUserLoginCode(String userLoginCode) {
+    protected void setUserLoginCode(String userLoginCode) {
         this.userLoginCode = userLoginCode;
     }
 
-    public boolean isAdminPrivilege() {
+    public boolean getAdminPrivilege() {
         return adminPrivilege;
     }
 
-    public void setAdminPrivilege(boolean adminPrivilege) {
-        this.adminPrivilege = adminPrivilege;
-    }
+
+
     //endregion
 
 
