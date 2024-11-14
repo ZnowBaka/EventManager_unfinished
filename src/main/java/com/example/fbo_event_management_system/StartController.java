@@ -61,40 +61,32 @@ public class StartController {
         String userName = userNameField.getCharacters().toString();
         String userPass = userPassField.getCharacters().toString();
 
-        //int DBIndex = findUserInDB(userName);
-        /*if (DBIndex != -1) {
-            boolean loginStatus = findUserPassInDB(DBIndex, userPass);
-            if (loginStatus) {
-                if (userArrayList.get(DBIndex).getAdminPrivilege()) {
-                    appAction.changeScene("MainAdmin.fxml");
-                }
-            }else {
-                appAction.changeScene("Main-Screen.fxml");
-            }
-            // Go to Main Screen
-        } else {
-            loginLabel.setText("Data mismatch: \nIncorrect username or password");
-        }*/
-        if (isFileReadable(new File("loginName.txt")) && isFileReadable(new File("loginCode.txt"))) {
-            try (BufferedReader reader = new BufferedReader(new FileReader("loginName.txt"))) {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    if (line.equals(userName)) {
-                        try (BufferedReader reader2 = new BufferedReader(new FileReader("loginCode.txt"))) {
-                            String line2;
-                            while ((line2 = reader2.readLine()) != null) {
-                                if (line2.equals(userPass)) {
-                                    appAction.changeScene("Main-Screen.fxml");
-                                    //if (userArrayList.get(newUserIndex).getAdminPrivilege()) {}
-                                }
-                            }
-                        }
+        File userNameFile = new File("loginName.txt");
+        File userPassFile = new File("loginCode.txt");
+
+        if (isFileReadable(userNameFile) && isFileReadable(userPassFile)) {
+            try (
+                    BufferedReader nameReader = new BufferedReader(new FileReader(userNameFile));
+                    BufferedReader passReader = new BufferedReader(new FileReader(userPassFile))
+            ) {
+                String userNameLine;
+                String userPassLine;
+                boolean isAuthenticated = false;
+                while ((userNameLine = nameReader.readLine()) != null && (userPassLine = passReader.readLine()) != null) {
+                    if (userNameLine.equals(userName) && userPassLine.equals(userPass)) {
+                        isAuthenticated = true;
+                        nameReader.close();
+                        passReader.close();
+                        break;
                     }
                 }
+                if (isAuthenticated) {
+                    appAction.changeScene("Main-Screen.fxml");
+                } else {
+                    loginLabel.setText("Data mismatch: \nIncorrect username or password");
+                }
             }
-
         }
-
     }
     /*public void writeToFile(File loginFile, String userName, String userPass) throws IOException {
         if (isFileReadable(loginFile)){
@@ -144,6 +136,30 @@ public class StartController {
     protected void onNewUserButtonClick(ActionEvent e) throws IOException {
         String userName = userNameField.getCharacters().toString();
         String userPass = userPassField.getCharacters().toString();
+
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("loginName.txt"));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (line.equals(userName)) {
+                    loginLabel.setText("A user with that username already exists");
+                    return;
+                } else {
+                    BufferedWriter writer = new BufferedWriter(new FileWriter("loginName.txt", true));
+                    writer.write(userName);
+                    writer.newLine();
+                    writer.close();
+                    BufferedWriter writer2 = new BufferedWriter(new FileWriter("loginCode.txt", true));
+                    writer2.write(userPass);
+                    writer2.newLine();
+                    writer2.close();
+                    appAction.changeScene("NewUser-Screen.fxml");
+                    return;
+                }
+            }
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
 
         /*int DBIndex = findUserInDB(userName);
         if (DBIndex == -1) {
