@@ -6,14 +6,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.IOException;
 
-import static com.example.fbo_event_management_system.NewUserController.existingUsernames;
-import static com.example.fbo_event_management_system.StartController.userArrayList;
 
-
-public class EventManagerApp extends Application {
+public class Main extends Application {
 
     private static Stage stage;
 
@@ -35,6 +31,22 @@ public class EventManagerApp extends Application {
 
 
     public static void main(String[] args) {
+
+
+        /*
+         Ok hvis denne kode block virker, så kan vi indsætte og reformatere resten af koden
+         Dvs. at vi kan/burde kunne få resten til at virke sammen eller igennem den indenfor en rimelig tid...
+         Går ud og laver noget mad klar nu ish 16:50
+         */
+        /*
+        okay hvad skal reformateres?
+        hvis koden deroppe virker, så skal vi gøre at vores metoder ideni EventManagerController bruger de her methods, sammen med dem vi allerede har,
+        Vi bør lave en statisk EventManagerController her i Main, som de andre fxml controllers så kan benytte.
+        det vi kan reformattere er ting som "generateReports" fra event manager, du kan benytte din tidligere kode til at skrive det til fil
+        vi kan lave en seperat methos til at kalde "eventName".getDetails() og skrive til fil
+         */
+
+
         /*try {
             File file1 = new File("userNameFile.txt");
             File file2 = new File("loginName.txt");

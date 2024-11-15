@@ -1,25 +1,21 @@
 package com.example.fbo_event_management_system;
 
-    /*
-    we should use a Singleton when we create the admin, to make sure only 1 admin is allowed
-    we should make a Factory for StandardUsers
-    */
-
 public class User {
-    protected String nameOfUser;
-    protected String userLoginName;
-    private String userLoginCode;
-    protected boolean adminPrivilege = false;
-    protected boolean manager = false;
+    private String profileName;
+    private String loginName;
+    private String loginCode;
+    private boolean adminPrivilege = false;
+
     //Constructor
-    public User() {
-        this.nameOfUser = nameOfUser;
-        this.userLoginName = userLoginName;
-        this.userLoginCode = userLoginCode;
+    public User(String username, String email, boolean isAdmin) {
+        this.profileName = profileName;
+        this.loginName = loginName;
+        this.loginCode = loginCode;
     }
+
     public User (String userLoginName, String userLoginCode){
-        this.userLoginName = userLoginName;
-        this.userLoginCode = userLoginCode;
+        this.loginName = userLoginName;
+        this.loginCode = userLoginCode;
     }
 
     public User(String nameOfUser, String userLoginName, String userLoginCode) {
@@ -29,80 +25,40 @@ public class User {
 
     //region Sets and Gets
     public String getNameOfUser() {
-        return nameOfUser;
+        return profileName;
     }
 
     public void setNameOfUser(String nameOfUser) {
-        this.nameOfUser = nameOfUser;
+        this.profileName = nameOfUser;
     }
 
     public String getUserLoginName() {
-        return userLoginName;
+        return loginName;
     }
 
     public void setUserLoginName(String userLoginName) {
-        this.userLoginName = userLoginName;
+        this.loginName = userLoginName;
     }
 
     protected String getUserLoginCode() {
-        return userLoginCode;
+        return loginCode;
     }
 
     protected void setUserLoginCode(String userLoginCode) {
-        this.userLoginCode = userLoginCode;
+        this.loginCode = userLoginCode;
     }
 
     public boolean getAdminPrivilege() {
         return adminPrivilege;
     }
 
-
-
     //endregion
 
-
-
-    protected void login() {
-
-    }
-
-    // Event types: Conference Concert Workshop
-    protected void createEvent(String eventType) {
-        switch (eventType){
-            case("conference"):
-                new ConferenceEvent();
-                break;
-            case("concert"):
-                new ConcertEvent();
-                break;
-            case("workshop"):
-                new WorkshopEvent();
-                break;
-            default:
-        }
-    }
-
-
-    protected void editEvent(Event event) {
-
-    }
-
-
-    protected void deleteEvent(Event event) {
-        if ((this.nameOfUser.equals(event.eventManager)) || this.adminPrivilege){
-
-        } else {
-
-        }
-    }
-
-
-    protected void joinEvent(Event event) {
+    protected void joinEvent(BasicEvent event) {
         event.setAttendants(this);
     }
 
-
-    protected void leaveEvent(Event event) {
+    protected void leaveEvent(BasicEvent event) {
         event.removeAttendants(this);
     }
 }

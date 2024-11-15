@@ -2,12 +2,8 @@ package com.example.fbo_event_management_system;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -15,13 +11,18 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class StartController {
-    EventManagerApp appAction = new EventManagerApp();
+    Main appAction = new Main();
 
     public int newUserIndex = -1;
     public static ArrayList<User> userArrayList = new ArrayList<>();
 
-
-
+    public void readUsersToSystem(ArrayList<User> userDB) {
+        User user = null;
+        for (User u : userDB) {
+            user = u;
+            EventManagerController.users.add(user);
+        }
+    }
 
 
     //region Labels and texts
@@ -55,14 +56,13 @@ public class StartController {
         }
         return false;
     }*/
-
     @FXML
     protected void onLoginButtonClick(ActionEvent event) throws IOException {
         String userName = userNameField.getCharacters().toString();
         String userPass = userPassField.getCharacters().toString();
-
         File userNameFile = new File("loginName.txt");
         File userPassFile = new File("loginCode.txt");
+
 
         if (isFileReadable(userNameFile) && isFileReadable(userPassFile)) {
             try (
@@ -87,7 +87,9 @@ public class StartController {
                 }
             }
         }
+        readUsersToSystem(userArrayList);
     }
+
     /*public void writeToFile(File loginFile, String userName, String userPass) throws IOException {
         if (isFileReadable(loginFile)){
             // If newUserIndex is valid, add the new user to the file
@@ -101,7 +103,7 @@ public class StartController {
         }
     }*/
 
-    public boolean isFileReadable(File loginFile) throws IOException{
+    public boolean isFileReadable(File loginFile) throws IOException {
         boolean readable = false;
         if (!Files.isReadable(Paths.get(loginFile.toString()))) {
             System.out.println("Error: Cannot read userNameFile.");
@@ -134,32 +136,7 @@ public class StartController {
 
     @FXML
     protected void onNewUserButtonClick(ActionEvent e) throws IOException {
-        String userName = userNameField.getCharacters().toString();
-        String userPass = userPassField.getCharacters().toString();
-
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader("loginName.txt"));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                if (line.equals(userName)) {
-                    loginLabel.setText("A user with that username already exists");
-                    return;
-                } else {
-                    BufferedWriter writer = new BufferedWriter(new FileWriter("loginName.txt", true));
-                    writer.write(userName);
-                    writer.newLine();
-                    writer.close();
-                    BufferedWriter writer2 = new BufferedWriter(new FileWriter("loginCode.txt", true));
-                    writer2.write(userPass);
-                    writer2.newLine();
-                    writer2.close();
-                    appAction.changeScene("NewUser-Screen.fxml");
-                    return;
-                }
-            }
-        } catch (Exception ex) {
-            throw new RuntimeException(ex);
-        }
+        appAction.changeScene("NewUser-Screen.fxml");
 
         /*int DBIndex = findUserInDB(userName);
         if (DBIndex == -1) {
